@@ -1,0 +1,152 @@
+CREATE CONSTRAINT Product_productID IF NOT EXISTS FOR (p:Product) REQUIRE (p.productID) IS UNIQUE;
+CREATE CONSTRAINT Category_categoryID IF NOT EXISTS FOR (c:Category) REQUIRE (c.categoryID) IS UNIQUE;
+CREATE CONSTRAINT Supplier_supplierID IF NOT EXISTS FOR (s:Supplier) REQUIRE (s.supplierID) IS UNIQUE;
+CREATE CONSTRAINT Customer_customerID IF NOT EXISTS FOR (c:Customer) REQUIRE (c.customerID) IS UNIQUE;
+CREATE CONSTRAINT Order_orderID IF NOT EXISTS FOR (o:Order) REQUIRE (o.orderID) IS UNIQUE;
+
+//Query DDL
+// Customers
+CREATE CONSTRAINT Customer_customer_id IF NOT EXISTS FOR (c:Customer) REQUIRE (c.customerID) IS UNIQUE;
+// Employees
+CREATE CONSTRAINT Employee_employee_id IF NOT EXISTS FOR (e:Employee) REQUIRE (e.employeeID) IS UNIQUE;
+// Orders
+CREATE CONSTRAINT Order_order_id IF NOT EXISTS FOR (o:Order) REQUIRE (o.orderID) IS UNIQUE;
+// Products
+CREATE CONSTRAINT Product_product_id IF NOT EXISTS FOR (p:Product) REQUIRE (p.productID) IS UNIQUE;
+// Suppliers
+CREATE CONSTRAINT Supplier_supplier_id IF NOT EXISTS FOR (s:Supplier) REQUIRE (s.supplierID) IS UNIQUE;
+// Categories
+CREATE CONSTRAINT Category_category_id IF NOT EXISTS FOR (cat:Category) REQUIRE (cat.categoryID) IS UNIQUE;
+// Shippers
+CREATE CONSTRAINT Shipper_shipper_id IF NOT EXISTS FOR (sh:Shipper) REQUIRE (sh.shipperID) IS UNIQUE;
+// Regions
+CREATE CONSTRAINT Region_region_id IF NOT EXISTS FOR (r:Region) REQUIRE (r.regionID) IS UNIQUE;
+// Territories
+CREATE CONSTRAINT Territory_territory_id IF NOT EXISTS FOR (t:Territory) REQUIRE (t.territoryID) IS UNIQUE;
+
+
+//Query DML
+LOAD CSV WITH HEADERS FROM "file:///products.csv" AS row
+MERGE (n:Product {productID:row.productID})
+SET n += row,
+n.unitPrice = toFloat(row.unitPrice),
+n.unitsInStock = toInteger(row.unitsInStock), n.unitsOnOrder = toInteger(row.unitsOnOrder),
+n.reorderLevel = toInteger(row.reorderLevel), n.discontinued = (row.discontinued <> "0");
+
+LOAD CSV WITH HEADERS FROM "file:///categories.csv" AS row
+MERGE (n:Category {categoryID:row.categoryID})
+SET n += row;
+
+LOAD CSV WITH HEADERS FROM "file:///suppliers.csv" AS row
+MERGE (n:Supplier {supplierID:row.supplierID})
+SET n += row;
+
+MATCH (p:Product),(c:Category)
+WHERE p.categoryID = c.categoryID
+MERGE (p)-[:PART_OF]->(c);
+
+MATCH (p:Product),(s:Supplier)
+WHERE p.supplierID = s.supplierID
+MERGE (s)-[:SUPPLIES]->(p);
+
+LOAD CSV WITH HEADERS FROM "file:///customers.csv" AS row
+MERGE (n:Customer {customerID:row.customerID})
+SET n += row;
+
+LOAD CSV WITH HEADERS FROM "file:///orders.csv" AS row
+MERGE (n:Order {orderID:row.orderID})
+SET n += row;
+
+MATCH (c:Customer),(o:Order)
+WHERE c.customerID = o.customerID
+MERGE (c)-[:PURCHASED]->(o);
+
+LOAD CSV WITH HEADERS FROM "file:///order-details.csv" AS row
+MATCH (p:Product), (o:Order)
+WHERE p.productID = row.productID AND o.orderID = row.orderID
+MERGE (o)-[details:ORDERS]->(p)
+SET details = row,
+details.quantity = toInteger(row.quantity);
+
+Contoh Soal + Cypher Query
+1. Cari 5 customer dengan jumlah order terbanyak
+
+Soal: Tampilkan 5 customer dengan jumlah order paling banyak.
+Query:
+
+MATCH (c:Customer)-[:PLACED]->(o:Order)
+RETURN c.companyName AS Customer, count(o) AS TotalOrders
+ORDER BY TotalOrders DESC;
+
+2. Cari 5 produk dengan total penjualan tertinggi
+
+Soal: Produk mana saja yang menghasilkan revenue paling besar (berdasarkan order details)?
+Query:
+
+MATCH (o:Order)-[d:CONTAINS]->(p:Product)
+RETURN p.productName AS Product,
+       round(sum(d.unitPrice * d.quantity * (1 - d.discount)),2) AS Revenue
+ORDER BY Revenue DESC;
+
+3. Supplier dengan produk terbanyak
+
+Soal: Supplier mana yang memasok produk paling banyak?
+Query:
+
+MATCH (s:Supplier)<-[:SUPPLIED_BY]-(p:Product)
+RETURN s.companyName AS Supplier, count(p) AS TotalProducts
+ORDER BY TotalProducts DESC;
+
+
+4.Produk dengan diskon tertinggi
+
+Soal: Cari produk yang paling sering dijual dengan diskon besar.
+Query:
+
+MATCH (o:Order)-[d:CONTAINS]->(p:Product)
+RETURN p.productName AS Product,
+       max(d.discount) AS MaxDiscount,
+       round(avg(d.discount),2) AS AvgDiscount
+ORDER BY MaxDiscount DESC;
+
+
+query graf
+Query 1:  Graf Customer dengan Order Terbanyak
+Query
+MATCH (c:Customer)-[:PLACED]->(o:Order)
+WITH c, count(o) AS totalOrders
+ORDER BY totalOrders DESC
+LIMIT 1
+MATCH (c)-[:PLACED]->(o:Order)
+RETURN c, o;
+
+Query 2: Graf Produk Terlaris
+Query
+MATCH (p:Product)<-[:CONTAINS]-(o:Order)
+WITH p, count(o) AS totalOrders
+ORDER BY totalOrders DESC
+LIMIT 1
+MATCH (p)<-[:CONTAINS]-(o:Order)
+RETURN p, o;
+
+Query 3 : graf Supplier dengan Produk Terbanyak
+Query
+MATCH (s:Supplier)-[:SUPPLIES]->(p:Product)
+WITH s, count(p) AS totalProducts
+ORDER BY totalProducts DESC
+LIMIT 1
+MATCH (s)-[:SUPPLIES]->(p:Product)
+RETURN s, p;
+
+Query 4: Produk dengan Diskon Tertinggi
+Query
+MATCH (o:Order)-[d:CONTAINS]->(p:Product)
+WITH p, max(d.discount) AS MaxDiscount
+ORDER BY MaxDiscount DESC
+LIMIT 1
+MATCH (o:Order)-[d:CONTAINS]->(p)
+RETURN o, d, p;
+
+
+
+
