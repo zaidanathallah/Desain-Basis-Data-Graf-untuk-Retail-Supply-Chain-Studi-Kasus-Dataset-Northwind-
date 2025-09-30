@@ -55,7 +55,7 @@ Gunakan Graph View di Neo4j Browser / Bloom untuk visualisasi.
 
 📚 Sumber Data
 Dataset Northwind yang digunakan bersumber dari repositori resmi Neo4j:
-👉 Neo4j Northwind Graph Examples
+👉 https://github.com/neo4j-graph-examples/northwind?utm_source=chatgpt.com
 
 📝 Kesimpulan
 Graph Database mempermudah pemahaman hubungan kompleks antar entitas dalam domain retail dan supply chain.
@@ -72,4 +72,5 @@ Tahun: 2025
 
 🪪 Lisensi
 Dataset Northwind bersifat publik dan dapat digunakan untuk pendidikan.
+
 Harap proyek ini digunakan untuk keperluan pembelajaran dan penelitian.
