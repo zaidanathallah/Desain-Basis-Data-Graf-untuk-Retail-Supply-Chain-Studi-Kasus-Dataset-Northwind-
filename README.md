@@ -1,77 +1,74 @@
-# 📊 Visualisasi Northwind Graph — Retail & Supply Chain
+# 📊 Northwind Graph Visualization — Retail & Supply Chain
 
-Proyek ini merupakan visualisasi database Northwind menggunakan **Neo4j Graph Database** sebagai studi kasus dalam domain retail / supply chain.  
-Data ditransformasikan menjadi node & relasi agar pola koneksi antar entitas dapat dianalisis secara interaktif dan intuitif.
-
----
-
-## 📝 Deskripsi Proyek
-
-Northwind adalah dataset klasik di dunia retail yang mencakup entitas seperti **Customer**, **Order**, **Product**, **Supplier**, **Employee**, **Shipper**, **Category**, **Region**, dan **Territory**.
-
-Dalam proyek ini, dataset tersebut:
-- Diimpor ke Neo4j
-- Diubah menjadi node & relasi melalui Cypher Query
-- Divisualisasikan sebagai graph untuk berbagai analisis seperti:
-  - Supplier dengan produk terbanyak  
-  - Shipper paling aktif  
-  - Kinerja per Sales / Employee  
-  - Distribusi pelanggan per produk populer  
+This project visualizes the **Northwind Dataset** using **Neo4j Graph Database** as a case study in the retail & supply chain domain.  
+The data is transformed into nodes and relationships to make entity connections more intuitive and interactive for analysis.
 
 ---
 
-## 🛠️ Teknologi Digunakan
+## 📝 Project Description
+
+The Northwind dataset is a classic retail dataset that includes entities such as **Customer**, **Order**, **Product**, **Supplier**, **Employee**, **Shipper**, **Category**, **Region**, and **Territory**.
+
+In this project, the dataset is:
+- Imported into Neo4j
+- Modeled as nodes and relationships using Cypher queries
+- Visualized as graphs for analytical purposes, including:
+  - Top suppliers by number of products  
+  - Most active shippers  
+  - Employee performance based on processed orders  
+  - Customer distribution for best-selling products  
+
+---
+
+## 🛠️ Technologies Used
 
 - 🧠 **Neo4j (Desktop / AuraDB)**  
 - 📝 **Cypher Query Language (CQL)**  
-- 🌐 **GitHub** sebagai repositori dan dokumentasi proyek  
-- 🗃️ **Dataset Northwind** sebagai sumber data utama dari repositori resmi Neo4j
+- 🌐 **GitHub** for project hosting & documentation  
+- 🗃️ **Northwind Dataset** as the primary data source (from the official Neo4j repository)
 
 ---
 
-## 💡 Insight Utama
+## 💡 Key Insights
 
-- Graph Database sangat cocok untuk retail & supply chain karena memungkinkan pemodelan hubungan langsung antar entitas.  
-- Node dengan banyak relasi (high degree) menunjukkan peran strategis, seperti produk best-seller, shipper utama, dan customer utama.  
-- Visualisasi *hub-and-spoke* memudahkan identifikasi entitas pusat (hub) seperti produk paling banyak dipesan atau shipper paling aktif.  
-- Analisis semacam ini sulit dicapai dengan database relasional biasa atau SQL murni.
+- Graph Databases are highly suitable for **retail and supply chain** because they allow direct modeling of relationships between entities.  
+- Nodes with high-degree connections represent strategic roles, such as best-selling products, top customers, or main shippers.  
+- *Hub-and-spoke* graph visualization makes it easy to identify central entities (hubs) like key shippers or popular products.  
+- These kinds of relationship insights are harder to achieve using only relational databases or plain SQL.
 
 ---
 
-## 🚀 Cara Menjalankan Proyek
+## 🚀 How to Run the Project
 
-1. Clone repositori ini:
+1. Clone this repository:
    ```bash
    git clone https://github.com/zaidanathallah/Desain-Basis-Data-Graf-untuk-Retail-Supply-Chain-Studi-Kasus-Dataset-Northwind-.git
-Buka Neo4j Desktop atau AuraDB.
+Open Neo4j Desktop or AuraDB.
 
-Buat project / instance baru.
+Create a new project / database instance.
 
-Import dataset CSV ke folder import/ pada instance database.
+Import the CSV dataset into the database's import/ folder.
 
-Jalankan query DDL (constraint) → lalu DML (LOAD CSV & relasi).
+Run DDL (constraints) followed by DML (LOAD CSV & relationships) queries.
 
-Gunakan Graph View di Neo4j Browser / Bloom untuk visualisasi.
+Use Neo4j Browser or Bloom to visualize the graph.
 
-📚 Sumber Data
-Dataset Northwind yang digunakan bersumber dari repositori resmi Neo4j:
+📚 Data Source
+The dataset used in this project comes from the official Neo4j Northwind examples:
 👉 https://github.com/neo4j-graph-examples/northwind
+📝 Conclusion
+Graph Databases simplify the understanding of complex relationships within the retail and supply chain domain.
+Through graph visualization, we can extract valuable insights about product popularity, supplier networks, shipping activity, and key customers — insights that are difficult to uncover from traditional relational tables.
 
-📝 Kesimpulan
-Graph Database mempermudah pemahaman hubungan kompleks antar entitas dalam domain retail dan supply chain.
-Dengan visualisasi graf, kita bisa mendapatkan insight langsung mengenai produk populer, koneksi supplier, pengiriman, hingga pelanggan utama — hal-hal yang sulit dilihat dari tabel relasional.
+👤 Author
+Name: Zaidan Athallah
 
-👤 Penulis
-Nama: Zaidan Athallah
+Field: Data Science / Data Analytics
 
-Bidang: Data Science
+Project: Northwind Graph Visualization using Neo4j
 
-Proyek: Visualisasi Northwind Graph dengan Neo4j
+Year: 2025
 
-Tahun: 2025
-
-🪪 Lisensi
-Dataset Northwind bersifat publik dan dapat digunakan untuk pendidikan.
-
-Harap proyek ini digunakan untuk keperluan pembelajaran dan penelitian.
-
+🪪 License
+The Northwind dataset is public and free to use for educational purposes.
+This project is intended for learning and research activities.
