@@ -42,7 +42,7 @@ In this project, the dataset is:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/zaidanathallah/Desain-Basis-Data-Graf-untuk-Retail-Supply-Chain-Studi-Kasus-Dataset-Northwind-.git
+   https://github.com/zaidanathallah/Desain-Basis-Data-Graf-untuk-Retail-Supply-Chain-Studi-Kasus-Dataset-Northwind-
 Open Neo4j Desktop or AuraDB.
 
 Create a new project / database instance.
@@ -72,3 +72,4 @@ Year: 2025
 🪪 License
 The Northwind dataset is public and free to use for educational purposes.
 This project is intended for learning and research activities.
+
