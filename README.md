@@ -56,6 +56,7 @@ Use Neo4j Browser or Bloom to visualize the graph.
 📚 Data Source
 The dataset used in this project comes from the official Neo4j Northwind examples:
 👉 https://github.com/neo4j-graph-examples/northwind
+
 📝 Conclusion
 Graph Databases simplify the understanding of complex relationships within the retail and supply chain domain.
 Through graph visualization, we can extract valuable insights about product popularity, supplier networks, shipping activity, and key customers — insights that are difficult to uncover from traditional relational tables.
@@ -63,7 +64,7 @@ Through graph visualization, we can extract valuable insights about product popu
 👤 Author
 Name: Zaidan Athallah
 
-Field: Data Science / Data Analytics
+Field: Data Science
 
 Project: Northwind Graph Visualization using Neo4j
 
@@ -72,4 +73,5 @@ Year: 2025
 🪪 License
 The Northwind dataset is public and free to use for educational purposes.
 This project is intended for learning and research activities.
+
 
